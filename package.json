@@ -1,0 +1,28 @@
+{
+  "name": "nodeloghlp",
+  "version": "0.1.1",
+  "dependencies": {
+    "winston": "latest",
+    "winston-dynamodb": "latest",
+    "fs": "latest",
+    "aws-sdk": "latest"
+  },
+  "description": "Node.js DynamoDB Log Helper",
+  "main": "config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Immunovia-AB/NodeLogHlp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Immunovia-AB/NodeLogHlp/issues"
+  },
+  "homepage": "https://github.com/Immunovia-AB/NodeLogHlp#readme",
+  "private": false,
+  "readme": "# NodeLogHlp\nNode DynamoDB Log Helper\n",
+  "readmeFilename": "README.md",
+  "gitHead": "34d7a6d72dcd65b9aa86bd595e585c38e675a34f",
+  "_id": "nodeloghlp@0.1.1",
+  "scripts": {},
+  "_shasum": "c9f82e47b5219cc61e2e13f3f2ab87e2721e7a23",
+  "_from": "nodeloghlp@latest"
+}
