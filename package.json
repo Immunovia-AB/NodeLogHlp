@@ -1,6 +1,6 @@
 {
   "name": "nodeloghlp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "dependencies": {
     "winston": "latest",
     "winston-dynamodb": "latest",
