@@ -28,9 +28,14 @@ function getConfigVariable(name, configFile) {
         }
     }
 
+    if (typeof defaults[name] != 'undefined') {
+        console.log("Config for option " + name + " not found. Using default value " + defaults[name]);
+        return defaults[name];
+    }
+
     throw {
         name: "ConfigError",
-        message: "Missing config for variable " + name + ".",
+        message: "Missing config for option  " + name + ".",
     }
 }
 
