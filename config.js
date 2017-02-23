@@ -8,6 +8,11 @@ var confMap = {
     'LOG_TO_CMD': 'logToCmd'
 };
 
+var defaults = {
+    'LOGLEVEL': 'INFO',
+    'LOG_TO_CMD': false
+}
+
 function getConfigVariable(name, configFile) {
 
     if (typeof process.env[name] != 'undefined') {
