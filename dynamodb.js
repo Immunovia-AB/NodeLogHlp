@@ -22,7 +22,12 @@ var dynamo = new (winston.Logger)({
   levels: myCustomLevels.levels,
   level: 'DEBUG',
   transports: [new winston.transports.DynamoDB(options)]
-}); 
+});
+
+if (global.LogToCmd) {
+    dynamo.add(winston.transports.Console);
+}
+
 dynamo.DEBUG('Logger instantiated', { 'Appl': global.Appl });
 
 module.exports=dynamo;
