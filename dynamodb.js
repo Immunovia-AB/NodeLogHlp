@@ -24,7 +24,7 @@ var dynamo = new (winston.Logger)({
   transports: [new winston.transports.DynamoDB(options)]
 });
 
-if (global.LogToCmd) {
+if (global.LogToCmd == true) {
     dynamo.add(winston.transports.Console);
 }
 
