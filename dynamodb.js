@@ -1,15 +1,28 @@
 var winston = require('winston');
-require('winston-dynamodb').DynamoDB;
+require('./../nodeloghlp/winston-dynamodb').DynamoDB;
 
-var aws = require('aws-sdk');
-aws.config = new aws.Config();
-aws.config.accessKeyId = global.AccessKeyId;
-aws.config.secretAccessKey = global.SecretAccessKey;
-aws.config.region = global.Region;
+var AWS = require('aws-sdk');
+try {
+  var sync = true;
+  AWS.config = new AWS.Config({ region: global.Region });
+  AWS.config.getCredentials(function(err) {
+    if (err) console.log(err.stack);
+    else {
+      global.AccessKeyId = AWS.config.credentials.accessKeyId;
+      global.SecretAccessKey = AWS.config.credentials.secretAccessKey;
+      global.Credentials = AWS.config.credentials;
+    }
+    sync = false;
+  });
+  while(sync) {require('deasync').sleep(100);}
+} catch(e) {
+  console.log("Can't set config. Error: " + e);
+}
 
 var options = {
   accessKeyId: global.AccessKeyId,
   secretAccessKey: global.SecretAccessKey,
+  credentials: global.Credentials,
   region: global.Region,
   useEnvironment: false,
   tableName: global.Table,
@@ -28,6 +41,10 @@ if (global.LogToCmd == true) {
     dynamo.add(winston.transports.Console);
 }
 
-dynamo.DEBUG('Logger instantiated', { 'Appl': global.Appl });
+try {
+  dynamo.DEBUG('Logger instantiated', { 'Appl': global.Appl });
+} catch(e) {
+  console.log("Can't instantiate Logger. Error: " + e);
+}
 
 module.exports=dynamo;

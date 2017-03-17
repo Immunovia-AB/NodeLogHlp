@@ -1,10 +1,12 @@
 {
   "name": "nodeloghlp",
-  "version": "0.1.4",
+  "version": "0.1.32",
   "dependencies": {
-    "winston": "latest",
-    "winston-dynamodb": "latest",
+    "winston": "latest",   
+    "lodash": "^4.12.0",
+    "node-uuid": "1.4.*",
     "fs": "latest",
+    "deasync": "latest",
     "aws-sdk": "latest"
   },
   "description": "Node.js DynamoDB Log Helper",
