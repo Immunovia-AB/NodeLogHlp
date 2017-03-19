@@ -11,8 +11,8 @@ var confMap = {
 
 var defaults = {
     'LOGLEVEL': 'INFO',
-    'LOG_TO_CMD': false,
-    'LOG_TO_DYNAMODB': true,
+    'LOG_TO_CMD': "false",
+    'LOG_TO_DYNAMODB': "true",
 };
 
 function getConfigVariable(name, configFile) {

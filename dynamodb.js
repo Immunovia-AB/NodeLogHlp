@@ -7,7 +7,7 @@ var dynamo = new (winston.Logger)({
   level: 'DEBUG'
 });
 
-if (global.LogToDynamoDB == true) {
+if (global.LogToDynamoDB === "true") {
     require('./../nodeloghlp/winston-dynamodb').DynamoDB;
 
     var AWS = require('aws-sdk');
@@ -41,8 +41,9 @@ if (global.LogToDynamoDB == true) {
     dynamo.add(winston.transports.DynamoDB, options);
 }
 
-if (global.LogToCmd == true) {
+if (global.LogToCmd === "true") {
     dynamo.add(winston.transports.Console);
+    dynamo.DEBUG("Added console transport!", { 'Appl': global.Appl});
 }
 
 try {
