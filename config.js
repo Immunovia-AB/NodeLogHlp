@@ -5,13 +5,15 @@ var confMap = {
     'AWS_ACCESS_KEY': 'accessKeyId',
     'AWS_SECRET_ACCESS_KEY': 'secretAccessKey',
     'LOGLEVEL': 'logLevel',
-    'LOG_TO_CMD': 'logToCmd'
+    'LOG_TO_CMD': 'logToCmd',
+    'LOG_TO_DYNAMODB': 'logToDynamoDB'
 };
 
 var defaults = {
     'LOGLEVEL': 'INFO',
-    'LOG_TO_CMD': false
-}
+    'LOG_TO_CMD': false,
+    'LOG_TO_DYNAMODB': true,
+};
 
 function getConfigVariable(name, configFile) {
 
@@ -36,7 +38,7 @@ function getConfigVariable(name, configFile) {
     throw {
         name: "ConfigError",
         message: "Missing config for option  " + name + ".",
-    }
+    };
 }
 
 exports.set = function(app, table, path) {
@@ -57,9 +59,10 @@ exports.set = function(app, table, path) {
         }
     }
 
-    global.AccessKeyId = getConfigVariable('AWS_ACCESS_KEY', config);
-    global.SecretAccessKey = getConfigVariable('AWS_SECRET_ACCESS_KEY', config);
-    global.Region = getConfigVariable('AWS_DEFAULT_REGION', config);
-    global.LogLevel = getConfigVariable('LOGLEVEL', config);
-    global.LogToCmd = getConfigVariable('LOG_TO_CMD', config);
-}
+    global.AccessKeyId      = getConfigVariable('AWS_ACCESS_KEY', config);
+    global.SecretAccessKey  = getConfigVariable('AWS_SECRET_ACCESS_KEY', config);
+    global.Region           = getConfigVariable('AWS_DEFAULT_REGION', config);
+    global.LogLevel         = getConfigVariable('LOGLEVEL', config);
+    global.LogToCmd         = getConfigVariable('LOG_TO_CMD', config);
+    global.LogToDynamoDB    = getConfigVariable('LOG_TO_DYNAMODB', config);
+};
