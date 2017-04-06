@@ -33,7 +33,6 @@ if (global.LogToDynamoDB === "true") {
       secretAccessKey: global.SecretAccessKey,
       credentials: global.Credentials,
       region: global.Region,
-      useEnvironment: false,
       tableName: global.Table,
       level: global.LogLevel
     };

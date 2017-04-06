@@ -2,8 +2,6 @@ var fs = require('fs');
 
 var confMap = {
     'AWS_DEFAULT_REGION': 'region',
-    'AWS_ACCESS_KEY': 'accessKeyId',
-    'AWS_SECRET_ACCESS_KEY': 'secretAccessKey',
     'LOGLEVEL': 'logLevel',
     'LOG_TO_CMD': 'logToCmd',
     'LOG_TO_DYNAMODB': 'logToDynamoDB'
@@ -59,8 +57,6 @@ exports.set = function(app, table, path) {
         }
     }
 
-    global.AccessKeyId      = getConfigVariable('AWS_ACCESS_KEY', config);
-    global.SecretAccessKey  = getConfigVariable('AWS_SECRET_ACCESS_KEY', config);
     global.Region           = getConfigVariable('AWS_DEFAULT_REGION', config);
     global.LogLevel         = getConfigVariable('LOGLEVEL', config);
     global.LogToCmd         = getConfigVariable('LOG_TO_CMD', config);
