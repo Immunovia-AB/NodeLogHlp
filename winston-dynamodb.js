@@ -3,15 +3,10 @@
     indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   winston = require("winston");
-
   util = require("util");
-
   AWS = require("aws-sdk");
-
   uuid = require("node-uuid");
-
   _ = require("lodash");
-
   hostname = require("os").hostname();
 
   datify = function(timestamp) {
@@ -114,27 +109,15 @@
       params = {
         TableName: this.tableName,
         Item: {
-          id: {
-            "S": uuid.v4()
-          },
-          level: {
-            "S": level
-          },
-          timestamp: {
-            "S": datify(Date.now())
-          },
-          msg: {
-            "S": msg
-          },
-          hostname: {
-            "S": hostname
-          }
+          id: { "S": uuid.v4() },
+          level: { "S": level },
+          timestamp: { "S": datify(Date.now()) },
+          msg: { "S": msg },
+          hostname: { "S": hostname }
         }
       };
       if (!_.isEmpty(meta)) {
-        params.Item.meta = {
-          "S": JSON.stringify(meta)
-        };
+        params.Item.meta = { "S": JSON.stringify(meta) };
       }
       return this.db.putItem(params, putCallback);
     }

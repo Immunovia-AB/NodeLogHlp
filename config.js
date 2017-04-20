@@ -51,6 +51,7 @@ exports.set = function(app, table, path) {
     catch (err) {
         if (err.code == "ENOENT") {
             console.log("No config file found.");
+            return false;
         }
         else {
             throw err;
@@ -61,4 +62,5 @@ exports.set = function(app, table, path) {
     global.LogLevel         = getConfigVariable('LOGLEVEL', config);
     global.LogToCmd         = getConfigVariable('LOG_TO_CMD', config);
     global.LogToDynamoDB    = getConfigVariable('LOG_TO_DYNAMODB', config);
+    return true;
 };

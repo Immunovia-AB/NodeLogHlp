@@ -1,0 +1,5 @@
+{
+    "region": "eu-west-1",
+    "logLevel": "DEBUG",
+    "LOG_TO_DYNAMODB": "true"
+}

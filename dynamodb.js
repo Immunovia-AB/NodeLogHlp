@@ -36,7 +36,7 @@ if (global.LogToDynamoDB === "true") {
       tableName: global.Table,
       level: global.LogLevel
     };
-
+    
     dynamo.add(winston.transports.DynamoDB, options);
 }
 
