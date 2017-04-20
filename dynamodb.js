@@ -8,7 +8,7 @@ var dynamo = new (winston.Logger)({
 });
 
 if (global.LogToDynamoDB === "true") {
-    require('./../nodeloghlp/winston-dynamodb').DynamoDB;
+    require('../nodeloghlp/winston-dynamodb').DynamoDB;
 
     var AWS = require('aws-sdk');
     try {

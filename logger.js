@@ -1,4 +1,4 @@
-var dynamo = require('./../nodeloghlp/dynamodb');
+var dynamo = require('../nodeloghlp/dynamodb');
 
 exports.info = function(str, uid, extra) {
   try {
