@@ -1,4 +1,3 @@
-console.log('./../nodeloghlp/dynamodb ' + __dirname);
 var dynamo = require(__dirname + '/dynamodb');
 
 exports.info = function(str, uid, extra) {
