@@ -52,16 +52,20 @@
     if (options.tableName == null) {
       throw new Error("need tableName");
     }
-    AWS.config.update({
-      accessKeyId: options.accessKeyId,
-      secretAccessKey: options.secretAccessKey,
-      credentials: options.credentials,
-      region: options.region
-    });
+    try {
+      var sync = true;
+      AWS.config = new AWS.Config({ region: global.Region });
+      AWS.config.getCredentials(function(err) {
+        if (err) console.log("winston-dynamodb.js can't get credentials: " + err.stack);    
+        sync = false;
+      });
+      while(sync) {require('deasync').sleep(100);}
+    } catch(e) {
+      console.log("winston-dynamodb.js can't set config. Error: " + e);
+    }
     this.name = "dynamodb";
     this.level = options.level || "info";
     this.db = new AWS.DynamoDB();
-    this.AWS = AWS;
     this.region = options.region;
     this.tableName = options.tableName;
     return this.dynamoDoc = options.dynamoDoc;
@@ -101,7 +105,7 @@
       if (!_.isEmpty(meta)) {
         params.Item.meta = meta;
       }
-      dynamoDocClient = new this.AWS.DynamoDB.DocumentClient({
+      dynamoDocClient = new AWS.DynamoDB.DocumentClient({
         service: this.db
       });
       return dynamoDocClient.put(params, putCallback);
