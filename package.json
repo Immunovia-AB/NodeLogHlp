@@ -4,6 +4,7 @@
   "dependencies": {
     "winston": "latest",   
     "lodash": "^4.12.0",
+    
     "node-uuid": "1.4.*",
     "fs": "latest",
     "deasync": "latest",

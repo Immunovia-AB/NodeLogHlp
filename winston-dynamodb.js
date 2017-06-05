@@ -52,7 +52,7 @@
     if (options.tableName == null) {
       throw new Error("need tableName");
     }
-    try {
+    try {      
       var sync = true;
       AWS.config = new AWS.Config({ region: global.Region });
       AWS.config.getCredentials(function(err) {
