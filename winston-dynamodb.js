@@ -37,12 +37,7 @@
       options = {};
     }
     regions = ["us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-northeast-1", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "sa-east-1"];
-    if (options.accessKeyId == null) {
-      throw new Error("need accessKeyId");
-    }
-    if (options.secretAccessKey == null) {
-      throw new Error("need secretAccessKey");
-    }
+   
     if (options.region == null) {
       throw new Error("need region");
     }
@@ -52,16 +47,24 @@
     if (options.tableName == null) {
       throw new Error("need tableName");
     }
-    try {      
-      var sync = true;
-      AWS.config = new AWS.Config({ region: global.Region });
-      AWS.config.getCredentials(function(err) {
-        if (err) console.log("winston-dynamodb.js can't get credentials: " + err.stack);    
-        sync = false;
-      });
-      while(sync) {require('deasync').sleep(100);}
-    } catch(e) {
-      console.log("winston-dynamodb.js can't set config. Error: " + e);
+    AWS.config = new AWS.Config({ region: global.Region });
+    if (process.env.RUNONECS != "true") {
+      if (options.accessKeyId == null) {
+        throw new Error("need accessKeyId");
+      }
+      if (options.secretAccessKey == null) {
+        throw new Error("need secretAccessKey");
+      }
+      try {      
+        var sync = true;
+        AWS.config.getCredentials(function(err) {
+          if (err) console.log("winston-dynamodb.js can't get credentials: " + err.stack);    
+          sync = false;
+        })  ;
+        while(sync) {require('deasync').sleep(100);}
+      } catch(e) {
+        console.log("winston-dynamodb.js can't set config. Error: " + e);
+      }
     }
     this.name = "dynamodb";
     this.level = options.level || "info";

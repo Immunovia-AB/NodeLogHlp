@@ -10,32 +10,39 @@ var dynamo = new (winston.Logger)({
 if (global.LogToDynamoDB === "true") {
     require(__dirname + '/winston-dynamodb').DynamoDB;
 
-    var AWS = require('aws-sdk');
-    try {
-      var sync = true;
-      AWS.config = new AWS.Config({ region: global.Region });
-      AWS.config.getCredentials(function(err) {
-        if (err) console.log(err.stack);
-        else {
-          global.AccessKeyId = AWS.config.credentials.accessKeyId;
-          global.SecretAccessKey = AWS.config.credentials.secretAccessKey;
-          global.Credentials = AWS.config.credentials;
-        }
-        sync = false;
-      });
-      while(sync) {require('deasync').sleep(100);}
-    } catch(e) {
-      console.log("Can't set config. Error: " + e);
-    }
-
-    var options = {
-      accessKeyId: global.AccessKeyId,
-      secretAccessKey: global.SecretAccessKey,
-      credentials: global.Credentials,
-      region: global.Region,
-      tableName: global.Table,
-      level: global.LogLevel
-    };
+    if (process.env.RUNONECS != "true") {
+      var AWS = require('aws-sdk');
+      try {
+        var sync = true;
+        AWS.config = new AWS.Config({ region: global.Region });
+        AWS.config.getCredentials(function(err) {
+          if (err) console.log(err.stack);
+          else {
+            global.AccessKeyId = AWS.config.credentials.accessKeyId;
+            global.SecretAccessKey = AWS.config.credentials.secretAccessKey;
+            global.Credentials = AWS.config.credentials;
+          }
+          sync = false;
+        });
+        while(sync) {require('deasync').sleep(100);}
+      } catch(e) {
+        console.log("Can't set config. Error: " + e);
+      }
+      var options = {
+        accessKeyId: global.AccessKeyId,
+        secretAccessKey: global.SecretAccessKey,
+        credentials: global.Credentials,
+        region: global.Region,
+        tableName: global.Table,
+        level: global.LogLevel
+      };
+    } else {
+      var options = {
+        region: global.Region,
+        tableName: global.Table,
+        level: global.LogLevel
+      };
+    }    
     
     dynamo.add(winston.transports.DynamoDB, options);
 }
