@@ -124,6 +124,8 @@
         }
       };
       if (!_.isEmpty(meta)) {
+        params.Item.name = { "S": meta.Appl };
+        delete meta.Appl;
         params.Item.meta = { "S": JSON.stringify(meta) };
       }
       return this.db.putItem(params, putCallback);
