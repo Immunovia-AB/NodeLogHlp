@@ -106,7 +106,9 @@
         }
       };
       if (!_.isEmpty(meta)) {
-        params.Item.meta = meta;
+        params.Item.name = { "S": meta.Appl };
+        delete meta.Appl;
+        params.Item.meta = { "S": JSON.stringify(meta) };
       }
       dynamoDocClient = new AWS.DynamoDB.DocumentClient({
         service: this.db
