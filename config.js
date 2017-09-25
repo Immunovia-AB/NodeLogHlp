@@ -50,7 +50,6 @@ exports.set = function(app, table, path) {
     }
     catch (err) {
         if (err.code == "ENOENT") {
-            console.log("No config file found.");
             return false;
         }
         else {
