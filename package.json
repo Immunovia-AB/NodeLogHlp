@@ -1,6 +1,6 @@
 {
   "name": "nodeloghlp",
-  "version": "0.1.41",
+  "version": "0.1.42",
   "dependencies": {
     "winston": "latest",   
     "lodash": "^4.12.0",
