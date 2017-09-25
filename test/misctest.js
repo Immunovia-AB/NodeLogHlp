@@ -8,12 +8,6 @@ var assert = require('assert');
 //var winstondynamodb = require("../winston-dynamodb");
 
 describe("Config", function() {
-    it("Set should return false with invalid argument", function(done) {
-        var res = require("../config").set('NodeLogHlp', 'unittestlog', __dirname + '/nodir');  
-        expect(res).to.not.be.null;       
-        assert.equal(res, false);
-        done();        
-    });
     it("Set should return true with valid argument", function(done) {
         var res = require("../config").set('NodeLogHlp', 'unittestlog', __dirname);  
         expect(res).to.not.be.null;       
