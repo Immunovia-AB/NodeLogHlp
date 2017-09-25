@@ -49,10 +49,7 @@ exports.set = function(app, table, path) {
         config = JSON.parse(fs.readFileSync(path + '/config.json'));
     }
     catch (err) {
-        if (err.code == "ENOENT") {
-            return false;
-        }
-        else {
+        if (err.code != "ENOENT") {
             throw err;
         }
     }
