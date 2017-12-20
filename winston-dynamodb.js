@@ -1,11 +1,11 @@
 (function() {
-  var AWS, DynamoDB, _, datify, hostname, util, uuid, winston,
+  var AWS, DynamoDB, _, datify, hostname, util, winston,
     indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   winston = require("winston");
+   
   util = require("util");
   AWS = require("aws-sdk");
-  uuid = require("node-uuid");
   _ = require("lodash");
   hostname = require("os").hostname();
 
@@ -98,7 +98,6 @@
       params = {
         TableName: this.tableName,
         Item: {
-          id: uuid.v4(),
           level: level,
           timestamp: datify(Date.now()),
           msg: msg,
@@ -118,7 +117,6 @@
       params = {
         TableName: this.tableName,
         Item: {
-          id: { "S": uuid.v4() },
           level: { "S": level },
           timestamp: { "S": datify(Date.now()) },
           msg: { "S": msg },
