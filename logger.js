@@ -87,12 +87,10 @@ if (process.env.RUNONAWS == "true") {
     try {
       if (!str)
         return false;
-      if (extra)
-        file.INFO('Msg:' + str + ', Appl:' + global.Appl + ', User:' + uid + ', Data:' + extra);
-      else if (uid)
-        file.INFO('Msg:' + str + ', Appl:' + global.Appl + ', User:' + uid);
+      if (uid)
+        file.INFO(str + '";"' + global.Appl + '";"' + uid + '"');
       else
-        file.INFO('Msg:' + str + ', Appl:' + global.Appl);
+        file.INFO(str + '";"' + global.Appl + '";');
       return true;
     } catch(e) {
       console.log("Can't log " + str + ". Error: " + e.message);
@@ -104,12 +102,10 @@ if (process.env.RUNONAWS == "true") {
     try {
       if (!str)
         return false;
-      if (extra)
-        file.DEBUG('Msg:' + str + ', Appl:' + global.Appl + ', User:' + uid + ', Data:' + extra);
-      else if (uid)
-        file.DEBUG('Msg:' + str + ', Appl:' + global.Appl + ', User:' + uid);
+      if (uid)
+        file.DEBUG(str + '";"' + global.Appl + '";"' + uid + '"');
       else
-        file.DEBUG('Msg:' + str + ', Appl:' + global.Appl);
+        file.DEBUG(str + '";"' + global.Appl + '";');
       return true;
     } catch(e) {
       console.log("Can't log " + str + ". Error: " + e.message);
@@ -121,12 +117,10 @@ if (process.env.RUNONAWS == "true") {
     try {
       if (!str)
         return false;
-      if (extra)
-        file.WARNING('Msg:' + str + ', Appl:' + global.Appl + ', User:' + uid + ', Data:' + extra);
-      else if (uid)
-        file.WARNING('Msg:' + str + ', Appl:' + global.Appl + ', User:' + uid);
+      if (uid)
+        file.WARNING(str + '";"' + global.Appl + '";"' + uid + '"');
       else
-        file.WARNING('Msg:' + str + ', Appl:' + global.Appl);
+        file.WARNING(str + '";"' + global.Appl + '";');
       return true;
     } catch(e) {
       console.log("Can't log " + str + ". Error: " + e.message);
@@ -138,12 +132,10 @@ if (process.env.RUNONAWS == "true") {
     try {
       if (!str)
         return false;
-      if (extra)
-        file.ERROR('Msg:' + str + ', Appl:' + global.Appl + ', User:' + uid + ', Data:' + extra);
-      else if (uid)
-        file.ERROR('Msg:' + str + ', Appl:' + global.Appl + ', User:' + uid);
+      if (uid)
+        file.ERROR(str + '";"' + global.Appl + '";"' + uid + '"');
       else
-        file.ERROR('Msg:' + str + ', Appl:' + global.Appl);
+        file.ERROR(str + '";"' + global.Appl + '";');
       return true;
     } catch(e) {
       console.log("Can't log " + str + ". Error: " + e.message);
