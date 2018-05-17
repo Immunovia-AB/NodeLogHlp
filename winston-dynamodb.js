@@ -31,6 +31,10 @@
     return date.year + "-" + date.month + "-" + date.day + " " + date.hour + ":" + date.minute + ":" + date.second + "." + date.millisecond;
   };
 
+  function getDatePlusDays(dt, days) {
+    return new Date(dt.getTime() + (days * 86400000));
+  }
+
   DynamoDB = exports.DynamoDB = function(options) {
     var ref, regions;
     if (options == null) {
@@ -94,6 +98,9 @@
         }
       };
     })(this);
+    var d = new Date(Date.now());
+    var newd = getDatePlusDays(d, 365);
+    var epoch = newd.getTime();
     if (this.dynamoDoc === true) {
       params = {
         TableName: this.tableName,
@@ -101,7 +108,8 @@
           level: level,
           timestamp: datify(Date.now()),
           msg: msg,
-          hostname: hostname
+          hostname: hostname,
+          ttl: epoch
         }
       };
       if (!_.isEmpty(meta)) {
@@ -120,7 +128,8 @@
           level: { "S": level },
           timestamp: { "S": datify(Date.now()) },
           msg: { "S": msg },
-          hostname: { "S": hostname }
+          hostname: { "S": hostname },
+          ttl: { "N": epoch }
         }
       };
       if (!_.isEmpty(meta)) {
