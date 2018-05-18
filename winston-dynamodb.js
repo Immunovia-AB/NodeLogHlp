@@ -101,6 +101,7 @@
     var d = new Date(Date.now());
     var newd = getDatePlusDays(d, 365);
     var epoch = newd.getTime();
+    var epochS = epoch.toString();
     if (this.dynamoDoc === true) {
       params = {
         TableName: this.tableName,
@@ -109,7 +110,7 @@
           timestamp: datify(Date.now()),
           msg: msg,
           hostname: hostname,
-          ttl: epoch
+          ttl: epochS
         }
       };
       if (!_.isEmpty(meta)) {
@@ -129,7 +130,7 @@
           timestamp: { "S": datify(Date.now()) },
           msg: { "S": msg },
           hostname: { "S": hostname },
-          ttl: { "N": epoch }
+          ttl: { "N": epochS }
         }
       };
       if (!_.isEmpty(meta)) {
