@@ -100,7 +100,7 @@
     })(this);
     var d = new Date(Date.now());
     var newd = getDatePlusDays(d, 365);
-    var epoch = newd.getTime();
+    var epoch = Math.round(newd.getTime() / 1000);
     var epochS = epoch.toString();
     if (this.dynamoDoc === true) {
       params = {
