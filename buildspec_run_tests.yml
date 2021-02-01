@@ -3,12 +3,11 @@ env:
   secrets-manager:
     githubtoken: codebuild-user:token
 phases:
-  pre_build:
-    commands:
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+  install:
+    runtime-versions:
+      nodejs: 10  
   build:
     commands:
-      - git clone https://aws-service:$githubtoken@github.com/Immunovia-AB/NodeLogHlp.git
       - ./run_tests.sh
 
 reports:
